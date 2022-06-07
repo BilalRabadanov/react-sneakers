@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useCart } from "../../hooks/useCart";
+
 import Info from "../Info/Info";
 
 import styles from "./Drawer.module.scss";
@@ -30,12 +31,10 @@ export default function Drawer({ items = [], onClose, onRemove, opened }) {
         const item = cartItems[i];
 
         await axios.delete(
-          `https://621a221981d4074e85ba3ed4.mockapi.io/cart/${item.id}`
+          "https://621a221981d4074e85ba3ed4.mockapi.io/cart/" + item.id
         );
         await delay(1000);
       }
-
-      await axios.put("https://621a221981d4074e85ba3ed4.mockapi.io/cart", []);
     } catch (error) {
       alert("Ошибка");
     }
@@ -46,7 +45,7 @@ export default function Drawer({ items = [], onClose, onRemove, opened }) {
     <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ""}`}>
       <div className={styles.drawer}>
         <h2 className="d-flex justify-between mb-30">
-          Корзина{" "}
+          Корзина
           <img
             onClick={onClose}
             className="cu-p"
